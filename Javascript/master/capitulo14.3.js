@@ -111,8 +111,8 @@ document.querySelector(".t25").addEventListener("click",px25);
 
 // ARGUMENT
 
-let arr = ["hola","me","lo"];
-let arr2 = ["chupas","?"];
+let arr = ["texto","de"];
+let arr2 = ["prue","ba"];
 
 // ... los tres puntos se usan para hacer uso de cada uno de los valores de arr2
 arr.push(...arr2);
