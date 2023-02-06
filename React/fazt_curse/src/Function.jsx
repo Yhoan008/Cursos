@@ -1,6 +1,6 @@
 
 function mostrarAlerta(){
-    alert("Presiona mas pasito no mames... Pero que rico");
+    alert("Presiona");
 }
 
 export function Function(){

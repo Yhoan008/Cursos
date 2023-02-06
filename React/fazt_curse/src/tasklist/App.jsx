@@ -1,46 +1,51 @@
-import Tasklist from "./Tasklist";
-import Taskform from "./Taskform";
+import React, { Component } from "react";
+import TaskContent from "./TaskContent";
+import styled from "styled-components";
 import { tasks } from "./task";
-import { useState, useEffect } from "react";
 
-function App() {
-  const [task, setTask] = useState([]);
+const Form = styled.form``;
 
-  useEffect(() => {
-    setTask(tasks);
-  }, []);
+const Input = styled.input`
+  display: block;
+  padding: 10px 5px;
+  margin-top: 10px;
+`;
 
-  function changeState(newTask, description) {
-    setTask([
-      ...task,
-      {
-        id: task.length,
-        title: newTask,
-        descripcion: description,
-      },
-    ]);
-  }
+const Button = styled.button`
+  padding: 5px;
+  margin: 10px;
+`;
 
-  function deleteTask(id) {
-    const filtrate = task.filter((e) => id != e.id);
-    setTask(task.filter((e) => id != e.id));
-  }
-
-  if (task.length === 0) {
+export default class App extends Component {
+  render() {
     return (
       <div>
-        <Taskform changeState={changeState} />
-        <h2>Tareas Sin asignar</h2>
+        <Form
+          style={{
+            width: "20%",
+            margin: "auto",
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          <h1>Tareas</h1>
+          <Input type="text" placeholder="Titulo" />
+          <Input
+            type="text"
+            placeholder="Descripcion"
+            style={{ height: "100px" }}
+          />
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
+            Agregar
+          </Button>
+        </Form>
+        <TaskContent tasks={tasks} />
       </div>
     );
   }
-
-  return (
-    <div>
-      <Taskform changeState={changeState} />
-      <Tasklist task={task} deleteTask={deleteTask} />
-    </div>
-  );
 }
-
-export default App;

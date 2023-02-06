@@ -25,3 +25,18 @@ let string = "hola";
 
 // Dentro de __proto__ podemos ver los metodos segun los tipos de datos, por ejemplo para arrays podremos ver metodos como pop,push,concat,slice, etc
 
+// Se repazan conceptos de Clases:
+
+class Animal {
+
+  constructor(name,edad){
+    this.name=name;
+    this.edad=edad;
+  }
+
+  static hablar2(name=3,edad=4){
+    return name+edad;
+  }
+}
+
+console.log(new Animal(1,2).hablar2);
