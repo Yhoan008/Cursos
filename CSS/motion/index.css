@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.bar {
+  position: fixed;
+  top: 0px;
+  background-color: orange;
+  width: 0%;
+  height: 20px;
+
+  animation: progressBar auto linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes progressBar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.pointer {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  border-radius: 100%;
+  margin: 100px auto;
+  transition: scale 1s ease 200ms, background-color 1s ease 200ms;
+  /*
+    transition-duration: 0.5s;
+    transition-property: width, height, background-color;
+    transition-timing-function: steps(3);
+    */
+}
+.pointer:hover {
+  scale: 2;
+  background-color: purple;
+}
