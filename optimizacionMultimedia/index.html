@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lazi loading</title>
+</head>
+<body>
+    <h2>Lazi loading y optimización de imagenes</h2><br><br>
+    <h3>Pasos para la optimización de imagenes</h3>
+    <p>1. Aplicar el atributo ' loading="lazi" ' en cada una de las imagenes cargadas, de esta forma solo se cargaran las imagenes a medida que va bajando el scroll de la pagina; Podemos comprobar esto presionando boton derecho, inspeccionar elemento y en la opcion Network</p>
+    <p>2. Hacer una reduccion de tamaño de cada imagen, esto lo podemos hacer por aplicaciones como gimp (En este paso se pierde calidad de la imagen asi que hay que tener cuidado con que imagenes si se aplica); En este caso no haremos este paso por lo especifico que puede llegar a ser</p><!-- Haciendo este paso se puede optimizar la pagina hasta un 50% más -->
+    <p>3. Comprimir todas las imagenes utilizadas, en este caso se uso la aplicacion https://tinypng.com</p>
+    <div class="img"><img src="imgOptimizadas/105706.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//117378.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//124109.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//132008.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//137464.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//138798.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//301917.png" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//419589.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//45196.jpg"  alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//4607.jpg"   alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//473154.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//576464.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//644210.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//906873.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//948528.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//979758.jpg" alt="" loading="lazy"></div>
+    <div class="img"><img src="imgOptimizadas//992404.jpg" alt="" loading="lazy"></div>
+
+    <p style="margin-top: 50px;font-size:2em;font-weight:900;text-align: center;">Al principio de esta simulacion la carga de la pagina requeria de <span style="color:red;">24.2MB </span>, despues de la optimizacion los tiempos de carga se redujeron a <span style="color:red;">1.3MB - 6MB</span></p>
+</body>
+</html>

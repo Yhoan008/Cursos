@@ -1,0 +1,1163 @@
+/*
+    COMO SE ORGANIZA CSS ?
+
+
+selector{
+    propiedad : valor;
+
+}
+
+*/
+
+
+/*    METODOLOGIA BEM
+
+En esta primera metodologia BEM cada categoria de clase se va añadiendo guion y el nombre del objeto, alargando el codigo pero siendo muy intuitivo
+
+body{
+    background-color: brown;
+}
+
+.form_input--active{
+    color: green;
+}
+*/
+
+/*
+En el metodo OOCSS se utilizan espacion en la declaracion de la clase y asi 
+desglosar las distintas propiedades de cada clase, siendo poco intuitivo, pero muy 
+efectivo y simple
+
+.block{
+
+}
+.block_red{
+
+}
+.block_green{
+
+}
+*/
+
+
+/*      SELECTORES    */ 
+
+*{
+    background-color:coral;
+    margin: 0;
+}
+body{
+}
+div p {
+    /* Selector de elementos estandar, primero se declara el elemento mas general, y luego los que estan contenidos*/
+}
+.selector_class{
+    /* Selector de clase da mayor especifidad a los elementos*/
+}
+#selector_id{
+    /* Selector ID da mayor especifidad a los elementos pero con mayor prioridad que las clases, nunca deben de haber dos ID en el mismo documento */ 
+}
+[atributo="selector_atributo"]{
+    /* El selector por atributo es otra forma de seleccionar los elementos, en el html puede estar declarado de cualquier forma, pero en el css debe de estar declarado entre corchetes */
+}
+
+
+/*      SELECTORES COMO PSEUDOCLASES    */
+.grid div:first-child{
+    /*Este tipo de selector refiere al primer elemento de un conjunto de elementos, se debe referir a los elementos en conjunto, no al contenedor, seguido de dos puntos y el selector first-child / last-child (En caso del ultimo elemento)*/
+}
+.grid div:nth-child(2){
+    /*Con este selector no referimos al segundo elemento de un conjunto de elementos, igualmente si ponemos el numero 3 no referiremos al tercer elemento, y asi sucesivamente */
+}
+
+
+
+
+/*      PSEUDOELEMENTOS     Los pseudo elementos son una evolucion de los selectores, funcionan de la siguiente manera    */
+
+/*      Despues del selector se debe de poner dos puntos, y seguido el pseudoelemento*/
+
+/*
+Block : solo permitido en elementos en bloque 
+Inline : Solo permitido en elementos en linea
+
+
+
+::first-line  |  Block  
+
+::first-letter  |  Block 
+
+::placeholder   | INLINE
+
+::selection     | INLINE 
+
+::after         | INLINE
+
+::before        | INLINE
+
+*/
+
+.pseudoelementos::first-letter{
+    /*  En este caso ::first-letter se refiere a la primera linea de texto mostrada en el documento, incluso si se modifica el tamaño de la pantalla */
+    font-size: 2em;
+}
+.pseudoelementos::first-line{
+    /*  ::first-line se refiere a la primera linea del documento, incluso si se modifica el tamaño de la pantalla*/
+    color:darkgoldenrod;
+}
+.pseudoelementos input::placeholder{
+    /*  ::placeholder modifica las propiedades del texto "fantasma" que aparece en el input de texto, funciona solo para valores INLINE  */
+    color: red;
+}
+.pseudoelementos p::selection{
+    /*   ::selection modifica las propiedades del selector de texto, es decir cuando con el raton o cursos arrastramos una parte del texto para seleccionarla con el objetivo de copiarla por ejemplo*/
+    color: yellow;
+    background-color: #DB6637;
+}
+.pseudoelementos b::before{
+    /*  ::before obligatoriamente debe de contar con una propiedad llamada content, en la cual podremos ingresar texto y darle mas propiedades al mismo; las particularidades de este content son que no puede seleccionarse, ni copiarse, ademas se le puede ingresar valores especiales o etiquetas html       */
+    content:"Intenta copiarme, <Ja> ";
+    color:#74DB39;
+}
+.pseudoelementos b::after{
+    /*  ::after funciona igual que before pero en la pagina se vera despues del selector     */
+    content: "Conmigo vuelves a caer, idiota";
+    color:#DB6637;
+}
+
+
+
+
+
+
+
+/*      PSEUDOCLASES */
+/*Son escucha de eventos 
+
+:hover
+
+:link
+
+:visited
+
+:active
+
+:focus
+
+:lang
+
+
+*/
+
+.pseudoclases img{
+    display: block;
+    margin: auto;
+    border: 4px solid red;
+    transition: .5s;
+    width: 150px;
+}
+.pseudoclases img:hover{
+    /*      el evento :hover es cuando pasa el mouse encima del elemento  */
+    background: blueviolet;
+    width: 200px;
+    border: 4px solid blue
+}
+.pseudoclases a:link{
+    /*      El evento :link va a modificar las propidades de un link no visitado, es decir solo funciona sobre elementos <a> */
+    background-color: #74DB39;
+    color: red;
+}
+.pseudoclases a:visited{
+    /*      El evento :visited modifica las propiedades de un link ya visitado anteriormente  (Modifica el link con uno existente para ver la propiedad)*/
+    color: yellow;
+}
+.pseudoclases img:active{
+    /*      El evento :active detecta cuando se da click encima del elemento, debe de mantenerse presionado para estar activa   */
+    border: 10px solid #74DB39;
+    width: 300px;
+}
+.pseudoclases input{
+    width:100px;
+    height: 100px;
+    background: red;
+}
+.pseudoclases input:focus{
+    /*      El evento :focus es aplicado generalmente a elementos de tipo input, donde las propiedades se aplicaran si hacemos click en el elemento, pero si damos click fuera de este, se desactivara      */
+    width: 200px;
+    background-color: blue;
+}
+.pseudoclases h2:lang(en){
+    /*      el evento :lang detecta el idioma en el cual esta configurado el elemento, normalmente esto se configura desde el head, y los valores que puede tomar son en(English), es(Español), o cualquier otro idima; y segun sea el idioma, se van aplicando las propiedades; Debe de ponerse como funcion y en los parentesis se indica el idima deseado para detectar;  El idioma por defecto de todo el documento es EN  */
+    padding: 20px;
+    color: orange;
+}
+
+
+
+
+
+
+
+/*      ESPECIFICIDAD   /  PRIORIDAD DE SELECTORES
+
+En las siguientes lineas estan ordenados de mayor a menor, los selectores y atributos, que respectivamente tienen mayor o menor prioridad en las hojas de estilo, siendo el de la linea 75 el atributo absoluto, nada tiene mayor prioridad en las hojas de estilo
+
+Para el ejemplo se va a declarar un mismo elemento pero cambiando sus valores 
+
+*/
+
+div h2 p{
+    color:#DB6637 !important ;
+}
+
+/* En esta jerarquia va el estilo en linea, declarado en el html como style="color:blue */
+
+#esp{
+    color: green;
+}
+
+.esp{
+    color: grey;
+}
+
+div h2 p{
+    color: red;
+    text-align: center;
+}
+
+
+
+
+
+
+/*      MEDIDAS  /  UNIDADES   */
+
+.medidas{
+    text-align: center;
+
+    /*      Unidades fijas    */
+
+
+    font-size: .6cm;  /* centimetros */
+    font-size: 6mm;   /* milimetros */
+    font-size: 20pt;  /* puntos  */
+    font-size: 1.7pc; /* pica (12 puntos / 6 picas es una pulgada)*/
+    font-size: 20px;
+}
+.medidas_text{
+
+    /*  Unidades relativas  */
+
+    font-size: 1em; /*  em  son 16 px por defecto, pero si hay modificaciones en el tamaño del elemento desde la caja contenedora, em pasara a ser multiplos del valor heredado  */
+    font-size: 0vw; /*  100vw es el ancho total de la pantalla y 50vw es el 50% de la pantalla*/
+    font-size: 2rem; /* finciona de la misma forma que em pero esta mejor adaptado, es como la evolucion de la medida*/ 
+}
+
+
+
+
+
+
+
+/*      PROPIEDADES DE TEXTO    :   LETRAS      */
+
+.medidas_tipografias{
+    font-size: 2em;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5; /*    El line height por defecto es 0.5, lo que resulta de dividir en dos partes iguales el alto de la tipografia o letra, si ponemos line height 1, ambas mitades se duplican, haciendo que el total de alto de letra sea 2          */
+    font-weight: 700; /*    Cambiar el ancho de letra */
+    color:#A3641A;  /*  Cambiar color de la letra */
+    text-align: center; /* Alineacion de texto*/
+    letter-spacing: 20px; /*Para la separacion de letras*/
+}
+
+
+
+
+
+
+/*      PROPIEDADES DE CAJAS/BLOQUES  DISPLAY   */
+
+.cajas{
+    position: relative;
+    top: 40px;
+    border: 2px solid #DB6637 ;
+    height: 500px;
+}
+
+.cajas_one{
+    border: 3px solid #DB6637;
+    height: 50px;
+    display: block; /*      Propiedad por defecto para cualquier elemento, ocupa todo el ancho de la pantalla, si se le asigna un width se le asignara un tamaño al elemento e individialmente se comportara como tal, pero su espacio real sigue siendo el 100% del ancho  */
+}
+.cajas_one p{
+    margin: 0;
+    font-size: 40px;
+}
+.cajas_two h2{
+    border: 5px solid #DB6637;
+    margin-left: 2px;
+}
+.cajas_two h2{
+    display: inline;    /*  Ocupa solamente el espacio real necesitado por su contenido, Esta propieda generalmente se le aplica a textos, ya que las propiedades de caja no funcionan aca    */
+}
+
+.cajas_three h2{
+    background-color: #0111A3;
+    width: 490px;
+    display: inline-block; /*   inline-block hace que el elemento se comporte como bloque pero pudiendosele aplicar las propiedades de un elemento en linea     */
+    text-align: center;
+}
+
+
+
+
+
+
+
+/*      MAQUETACION DE CAJAS    /   FLEXBOX     CAJAS   FLEXIBLES         DISPLAY
+
+
+En esta seccion seguiremos trabajando con display, pero ya no aplicaremos la propiedad a un elemento en especifico sino a un contenedor, mediante el cual vamos a modificar la forma en que los elementos se organizan y disponen en el contenedor
+
+*/
+
+
+.flex{
+
+    display: flex;/*      FLEX    
+    La propiedad flex ubica los elementos de un contenedor con el mismo height siempre, lo unico modificable es el width
+
+    Esta propiedad organiza los elementos guiandose por filas y columnas, y la direccion de las mismas 
+
+    Filas : Main axis (main start / main end)
+    Columans : Cross axis (cross start / cross end )
+    */
+
+
+
+    /*  FLEX-DIRECTION  */
+
+    flex-direction: row; /*     Row es el valor por defecto de flex, aca los elementos se ubican a lo largo del main axis, y si se modifica el tamaño de la pagina, tambien pueden los elementos hacerse mas pequeños */
+    
+    flex-direction: column; /*  Column ubica los elementos a lo largo el cross axis, no son modificados por las dimensiones de la pagina        */
+
+    flex-direction: row-reverse; /*  Row-reverse invierte el orden de los elementos, tomando como referencia el valor row o el main axis    */
+
+    flex-direction: column-reverse; /* Column-reverse invierte el orden de los elementos, tomando como referencia el valor column o el cross axis */
+
+    flex-direction: row;
+
+
+
+    /*      FLEX-WRAP  / COMPORTAMIENTO DE CAJAS       */
+
+    flex-wrap: nowrap; /*flex-wrap es una propiedad que mofica el comportamiento de los elementos al hacer mas pequeña o mas grande la pagina, el valor por defecto es nowrap, el cual indica que cuando la pagina se haga mas pequeña, lo elementos cambiaran su tamaño para ajustarse */
+
+    flex-wrap: wrap; /* Wrap evita que los elementos modifiquen su tamaño cuando la pagina se hace mas pequeña, conservan su tamaño original y cuando no hay espacio suficiente, el ultimo elemento pasa abajo del resto, conservando el orden  */
+
+    flex-wrap: wrap-reverse ; /* wrap-reverse tiene la misma utilidad que el valor anterior pero los elemntos en vez de pasar hacia abajo, lo haran hacia arriba     */
+
+
+
+    /*  FLEX-FLOW   */
+    flex-flow: row wrap-reverse; /*Esta propiedad resulta de la combinacion de flex-direction y flex-wrap, los valores que puede tomar son todas las combinaciones de estos dos; row wrap ; column wrap ; row-reverse wrap ; column wrap-reverse; etc       */
+
+
+    /*  JUSTIFY-CONTENT    /    UBICACION DE ELEMENTOS EN UN CONTENEDOR      */
+
+    /*  Esta propiedad modifica la alineacion en main axis de los elementos dentro del contenedor   */
+
+    justify-content: center; /*No modifica la distancia entre los elementos, solo centra el contenedor     */
+
+    justify-content: space-around;/*Modifica el margin entre los elementos , distribuyendolos a lo largo del width con exactamente el mismo margin alrededor  (Aunque se le puede asignar tambien margin a los elementos por individual )*/
+
+    justify-content: space-between;/*Modifica la distancia entre los elementos , distribuyendolos a lo largo del width, pero los elementos laterales no tienen margin en direccion hacia la pagina */
+
+    justify-content: space-evenly; /*Modifica el margin entre los elementos , distribuyendolos a lo largo del width, pero el margin entre los elementos no se suma como si lo hace space-around*/
+
+
+
+    /*  ALING-ITEMS     /   ALING-CONTENT    
+    UBICACION DE ELEMENTOS DENTRO DE UN CONTENEDOR*/
+
+    /*  Estas propiedades modifican la alineacion de los elementos a lo largo del cross  axis, es decir, alineacion en vertical; PUEDEN TOMAR LOS MISMOS VALORES
+    */
+
+    /*  DIFERENCIAS ENTRE ALIGN-ITEMS Y ALIGN-CONTENT
+    Align-content: Se usa cuando tenemos MAS DE UNA linea de elementos dentro de un contenedor, los elementos se ubicaran segun el valor que le demos, y esto se mantendra independientemente si modificamos el tamaño de la pagina 
+    
+    Align-items: se usa cuando tenemos UNA sola linea de elementos dentro de un contenedor, si el tamaño de la pagina se ve modificado, la caja contenedora se dividira en dos partes iguales, pero ocupando el espacio total del heidht original
+    
+    */
+
+
+    height: 100vh;/*ANTES TENEMOS QUE DAR UN TAMAÑO AL HEIGHT PORQUE SI NO NO VA A HABER CAMBIOS VISUALES, DAAAAH ! */
+
+    align-items:stretch;/*Es la propiedad por defecto, si los elementos no tienen un height definido, se ajustara y rellenara al tamaño del contenedor */
+
+    align-items: center; /*Esta propiedad alinea los elementos al centro del total height del contenedor, sin modificar su tamaño  */
+
+    align-items: flex-start;/*Esta propiedad alinea los elementos al comienzo del contenedor, es parecida a stretch, pero no modifica el tamaño de los elementos*/
+
+    align-items: flex-end;/*Esta propiedad alinea los elementos al final del contenedor     */
+
+    align-content: baseline; /*El valor baseline ubica los elementos igual que un flex-end, pero UNICAMENTE funciona si el valor de flex-wrap es wrap-reverse*/
+
+}
+.flex div{
+    width:120px;
+    height: 120px;
+    background-color: #248;
+    color:#00ff00 ;
+    font-size: 1.4em;
+    text-align: center;
+}
+.flex .orange{
+    background-color:orange
+}
+.flex .gray{
+    background-color:gray;
+}
+
+
+
+/*      MAQUETACION DE ELEMENTOS FLEX   
+
+Las anteriores propiedades (flex-direction, flex-wrap, justify-content, align-items) se aplican a la caja contenedora, pero las siguientes propiedades son aplicadas a los elementos dentro de la caja 
+*/
+
+.elementos_flex{
+    display:flex;
+    height: 500px;
+}
+.elementos_flex div{
+    width: 120px;
+    height: 120px;
+}
+.red{
+    /*La primera propiedad es ALIGN-SELF, la cual alinea los elementos a lo largo del cross axis, cuenta con los mismos valores que align-items/align-content*/
+    align-self: center;
+    align-self: flex-start;
+    align-self: flex-end;
+    align-self: baseline;  
+    align-self: stretch; 
+}
+.red{
+    flex-grow: 1; /*FLEX-GROW calcula el espacio sobrante a lo largo del width y lo rellena con el elemento al cual le asigamos el valor
+    todos los flex grow trabajan en conjunto, lo voy a explicar con el siguiente ejemplo
+    
+    tenemos dos elementos 
+    .blue{
+        flex-grow:1;
+    }
+    .green{
+        flex-grow:2;
+    }
+    
+    El espacio total restante se calcula y se divide en tres espacios iguales, dos de esos espacios los tomara .green y solo un espacio lo tomara .blue
+    */
+}
+.blue{
+    flex-basis: 500px; /*El FLEX-BASIS funciona exactamente igual que el widht, da un tamaño especifico al elemento, pero se usa esta propiedad en las cajas flexibles por que se puede combinar con otras poopiedades*/
+}   
+.green{
+    flex-shrink: 2; /*FLEX-SHRINK modifica el nivel en que el elemento "cede" a achicarse cuando se modifica el tamaño de la pagina, si el valor es 0, va a conservar su tamaño original sin importarle el resto de los elementos del contenedor, si el valor es 1, se achicara en la misma proporcion que sus elementos compañeros, pero si por ejemplo su nivel es 2, va a achicarse dos veces mas rapido al cambiar el tamaño de la pagina    */
+}
+.blue{
+    flex:1 2 500px; /*Flex, dentro de un contenedor flex, reune el conjunto de propiedades flex-grow, flex-basis y flex-shrink respectivamente */
+}
+
+
+/*La propiedad ORDER, ordena los elementos de la forma que nosotros querramos, sin importar el orden en que los hayamos puesto en el html, si queremos intercambiar el orden de los elementos, se posicionaran de menor a mayor a lo largo del contenedor segun los valores que asignemos */
+.red{
+    order:100;
+}
+.blue{
+    order:3;
+}
+.green{
+    order:2;
+}
+
+
+
+/*EJERCICIO DEDICADO A PRACTICA CON CAJAS FLEX*/
+/*DAR CLICK EN EL ENLACE PARA ACCEDER A LAS ACTIVIDAD
+QUEDO BONITA :3
+X*/
+.form_flex{
+    text-decoration:none;
+}
+.form_img{
+    background-image: url(recursos/chi.jpg);
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size: 100% 100%;
+    height: 324px;
+    box-sizing: border-box;
+    padding: 70px;
+}
+.form_img h2{
+    display: inline;
+    background-color: transparent;
+    font-size:3em;
+    box-sizing:border-box;
+    padding: 50px;
+}
+
+
+
+
+
+/*      GRID    MODELO DE TABLAS    GRILLAS     */
+/*Para la explicacion de este tema voy a crear otro documento porque se van a hacer muchos ejemplos de tablas distintas unas de las otras y no quiero sobresaturar la pagina actual, porfavor ingresar al link      */
+
+.grid-container{
+    width: 100%;
+    height:500px;
+    background-image: url(recursos/spidy.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+.grid-container h2{
+    padding-top: 180px;
+    background-color:transparent;
+}
+.grid-container h2 a{
+    border-radius: 30px;
+    padding: 20px 50px;
+    text-decoration: none;
+    background-color: transparent;
+    font-size:1.5em;
+    color: #008;
+}
+.grid-container a:hover{
+    background-color:rgb(100, 0, 0, .4)
+}
+
+
+
+
+
+/*      MODELO DE CAJAS     */
+/* Las propiedades del tamaño de la caja son la siguientes */
+
+.cajas_three h2{
+    /*      CONTENT     , se modifica con la propiedad*/
+    line-height: .5;
+
+    /*      PADDING     */
+    padding: 20px;
+    
+    /*      BORDER      */
+    border: 6px dashed #74DB39; /* Propiedad para editar el borde, los tipos de bordes son : double, solid, dashed, groove, inset, outset, ridge*/
+
+    /*      MARGIN      */
+    margin: 10px;/*    Con margin controlamos la distancia del elemento con respecto al resto   */
+
+    /*      OUTLINE     */
+    outline: 6px solid #8F3815; /*  Con outline se resalta un borde externo de la caja, pero no ocupa un espacio real, por lo que no va a modificar nada en el documento   */
+
+
+    
+    
+    box-sizing: border-box; /*  Esta propiedad impide que el tamaño de la caja sea modificado por el padding o border, conserva su tamaño pero no se ajusta al texto   */
+    
+    box-sizing: content-box; /*  Esta propiedad es todo lo contrario a la anterio, se modifica para ajustarse al padding o border asignado, acomodandose al texto  */
+
+    
+    border-radius: 15px; /*    Para redondear las esquinas de la caja    */
+} 
+
+
+
+
+
+
+/*      SOMBRAS     */
+.cajas_three h2{
+    box-shadow: 30px 20px 12px 10px #000; /*  agrega sombra al elemento; cada valor es : eje Y, eje X, desenfoque, tamaño de la sombra, color  */
+    text-shadow: 10px 10px 10px #fff; /*    Agregar sombra al texto; cada valor es : eje Y, eje X, desenfoque, color */
+    text-shadow: 10px 10px 10px #fff, 10px 10px 10px #fff, 10px 10px 10px #fff, 10px 10px 10px #fff; /* Para dar mayor intensidad   */
+
+}
+
+
+
+
+
+
+
+/*      POSICIONAMIENTO     */ 
+
+/*      Cuando un elemento se le da una propiedad de posicionamiento adquiere nuevas propiedades */
+
+.pos{
+    position: relative;
+    outline: 10px solid red;
+}
+.pos div{
+    width: 100px;
+    height: 100px;
+}
+.pos1{
+    background-color: #74DB39;
+    position: static; /*    STATIC es la propiedad de position por defecto, cuando esta asi se considera que no esta posicionado, asi que da igual ponerla      */
+}
+.pos2{
+    background-color:#8F3815;
+    position: relative; /* RELATIVE posiciona el elemento respecto a su estado original, conservando su espacio en el documento, y adquiere las siguientes propiedades:     */
+    top: 0px;
+    left: 100px;
+    right: 300px;
+    bottom: 300px;
+    /*  Las propiedades top y left tienen la prioridad mas alta con respecto a right y bottom*/
+}
+.pos3{
+    background-color: #DB6637;
+    position: absolute; /*  ABSOLUTE posiciona el elemento segun el viewport, y dejara de conservar su espacio en el documento, es decir si hay elementos debajo, subiran ocupando su lugar; Si el elemento que posicionamos tiene un contenedor padre, y este contenedor esta posicionado, se posicionara dentro del espacio contenedor     */
+    left: 200px;
+    top: 200px;
+}
+.pos4{
+    background-color: aqua;
+    position: fixed; /*     Tambien deja de conservar el espacio en el documento, pero el posicionamiento no sera con respecto al inicio del documento sino  de la visal de la pantalla, es decir se quedara en el mismo lugar incluso si se da scrooll a la pantalla, se usa mucho para los anuncios fastidiosos             */ 
+    left: 20px;
+    top: 20px;
+    z-index: 100px;
+}
+.pos5{
+    background-color: #0111A3;
+    position: sticky; /*    Sticky sigue conservando el espacio en el documento pero al tomar las propiedades de posicion, cada una le indicara la distancia que debe tener con respecto a cada lado del viewport, pero solo si el viewport asi se posiciona con el scroll, de lo contrario mantendra su posicion original; Tambien si el elemento esta dentro de un contenedor padre, su posicion no saldra del contenedor       */
+    top: 100px;
+    bottom: 200px;
+    left: 500px;
+}
+.pos6{
+    background-color: #A3641A;
+}
+
+
+
+
+
+/*      FLOAT       */
+
+.float_text div{
+    float: left;    /*   La propiedad FLOAT posiciona los elementos en el eje derecho o izquierdo de su contenedor, dependiendo del porcentaje del tamaño de los elementos ; Si los elementos son solo INLINE va a tener las mismas proporciones segun lo anterior, pero si uno de los elementos es una imagen y el otro un INLINE, en inline rodeara la imagen   */
+}
+.primario{
+    width: 40%;
+    outline: 4px solid red;
+}
+.secundario{
+    width: 60%;
+    outline: 4px solid orange;
+}
+
+
+/*      Propiedad FLOAT aplicada a imagenes */
+
+.float_img{
+    margin: auto;
+    outline: 4px solid orange;
+    width: 50%;
+
+}
+.float_img img{
+    width: 50%;
+    float: right;
+}
+
+
+
+
+
+
+.centrado{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    background-color: #74DB39;
+}
+.centrado div{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: #0111A3;
+    
+    
+    /*   EJEMPLO DE COMO CENTRAR UN DIV DE FORMA RESPONSIVE    */
+
+    top: 0; /* Distancia del elemento con respecto hacia arriba*/
+    left:0;     /* Distancia del elemento con respecto hacia la izquierda*/
+    right: 0;   /* Distancia del elemento con respecto hacia la derecha*/
+    bottom:0;   /* Distancia del elemento con respecto hacia abajo*/
+    margin: auto;
+
+
+
+    /*      PROPIEDADES DE POSICIONAMIENTO    explicacion Z-INDEX  */
+
+    z-index: -10;       /*      El z-index da posicion en el eje z, es decir puede dictaminar si un elemento se posiciona delante o detras de otro, funciona igual que las otras propiedades de posicion pero con respecto al fondo; Con esta propiedad ocurre un dilema y es que si el elemento que estamos posicionando esta contenido en un contenedor padre, y queremos posicionar el hijo detras del padre, solo podremos hacerlo si el padre no esta declarado con el z-index, es decir esta propiedad no debe de existir en el padre, nisiquiera de valor 0, y en el hijo si se le asigna cualquier valor negativo     */
+
+
+}
+
+
+
+
+/*          OVERFLOW        La propiedad overflow nos permite ocultar o escrollear un elemento que sobrepasa las dimensiones de su contenedor   */
+
+.overflow{
+
+    border: 2px solid salmon;
+
+    overflow: visible; /*   El valor VISIBLE  es el valor por defecto de esta propiedad, el contenido que sobrepasa se muestra normalmente  */
+
+    overflow: auto; /*  El valor AUTO asigna un scroll solo si el contenido sobrepasa en contenedor, esto puede ser en Y o X, en caso de que no sobrepase, no afecta scroll ni contenedor   */
+
+    overflow: hidden; /*    El valor HIDDEN recorta el contenido, es decir, si se sobrepasa el contenedor, el contenido de mas no va a poder ser visible de ninguna forma   */
+
+    overflow: scroll; /*    El valor SCROLL crea una barra de scroll en el eje Y y X sin importar si el contenido sobrepasa contenedor o no */
+
+    /*  Otras formas de escribirlo  */
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+.overflow, .overimage{
+    display: inline-block;
+    margin-left: 200px;
+
+    width: 350px;
+    height: 380px;
+}
+
+.overimage{
+    overflow: hidden;
+}
+
+
+
+
+/*    OBJECT-FIT   POSICIONAMIENTO DE IMAGENES   */
+
+.object-img{
+    width: 300px;
+    height: 200px;
+    margin: auto;
+    margin-top: 20px;
+    outline: 4px solid aqua;
+}
+.object-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;/*  El valor contain ajusta la resolucion al contenedor, ajustando el eje mas grande de la imagen al borde mas chico del contenedor, es decir no se recorta nada     */
+    
+    object-fit: cover; /*   El valor cover ajusta la imagen al eje mas grande del contenedor, si el eje contrario es mas pequeño que la imagen, esta va a recortarse*/
+
+    object-fit: none; /*    El valor none no le importa las propiedades del contenedor, mantiene los valores originales de la imagen */
+
+    object-fit: scale-down; /*   El valor scale-down, detecta cual es la resolucion mas pequeña entre contain o none, y deja la que mas le convenga     */
+
+
+
+    /*  PROPIEDADES PARA EL POSICIONAMIENTO*/
+    object-position: right;
+    object-position: left;
+    object-position: top;
+    object-position: bottom;
+
+    object-position: 20px;
+    object-position: 2em;
+
+    object-position: right 20px;
+    object-position: left 40px; /*  Este valor ubica la imagen a la izquierda, y la baja 40 px*/
+
+
+}
+
+
+/*  LISTA DE CURSORES */
+/*   https://www.w3schools.com/cssref/tryit.asp?filename=trycss_cursor   */
+.cursor{
+    width: 100px;
+    height: 100px;
+    outline: 3px solid red;
+    background: salmon;
+
+    cursor: row-resize;
+}
+
+
+
+
+
+
+.colorizacion{
+    padding-top: 40px;
+    width: 100vw;
+    height: 450px;
+}
+.colorizacion div{
+    margin:auto;
+}
+.color,.mix div{
+    width: 200px;
+    height: 200px;
+    border: 4px outset #000;
+    border-radius: 26% ;
+    box-sizing: border-box;
+}
+.mix{
+    display: flex;
+    padding: 20px;
+    width: 650px;
+    margin: auto;
+}
+
+
+/*      COLORIZACION            */
+/*
+    Funciona con los tres colores siguientes: (RGB) Red ,Green, Blue 
+    Con la combinacion de estos tres se logran todos los colores conocidos 
+*/
+
+.red{
+    background-color: #f00;/* Sistema hexagesimal de 1 a f */
+    background-color: #ff0000;
+    background-color: rgb(255, 0, 0,1);/*rgb(red, green, blue) 
+    De los anteriores propiedades, el rango de valores esta entre 0 y 255, donde 0 es como no agregar nada de pintura, y 255 es agregar la cantidad mayor de pintura; El ulimo valor "1", es el nivel de opacidad de 0 a 1
+    */
+}
+.green{
+    background-color: #0f0;
+    background-color: #00ff00;
+    background-color: rgb(0, 255, 0,1);
+}
+.blue{
+    background-color: #00f;
+    background-color: #0000ff;
+    background-color: rgb(0, 0, 255, 1);
+}
+.color{
+    background-color: rgb(105, 255, 105);
+}
+
+
+/*      RESPONSIVE DESING   /   DISEÑO CON RESOLUCIONES DISTINTAS*/
+
+/*      Se creo una nueva pagina ya que se va a jugar con la disposicion de los elementos y no quiero que afecte los demas elementos mas que para el ejemplo, para ingresar al nuevo link de click en "Presioname que rico Ahhh!"    */
+
+.responsive{
+    text-align: center;
+    padding: 30px;
+    background-image: url(recursos/66139.jpg);
+}
+.responsive a{
+    color: #DB6637;
+    background-color: #0111A3;
+
+    font-size: 2em;
+    font-family:cursive;
+}
+
+
+
+
+
+
+
+/*      TRANSICIONES    */
+
+.transitions{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #248;
+    padding: 20px 0;
+}
+
+.transitions div{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #009900;
+    margin-top: 40px;
+
+
+    left: 0; /*Es importante delimitar el inicio y el final del a transition */
+}
+
+
+/* Las transiciones siempre vienen acompañadas obligatoriamente de eventos, tales como el hover, una ves se active se activa tambien la transicion del cambio */
+.transitions:hover > div{
+    left: 90%;
+    background-color: yellow;
+}
+
+.transitions div{
+    transition-property: left, background-color ; /*Los tipos de propiedades a los que podemos aplicar la transition son right, top, left, bottom, color, background  */
+    transition-duration: 1s; /*La duracion de la transicion*/
+    transition-delay: 0s; /*Estar propiedad modifica el tiempo que va a tardar en empezar la transition*/
+
+
+
+    
+    
+}
+
+.transitions div:first-child{
+    transition-timing-function: linear; /*Esta propiedad indica en base a que funcion va a increntar el tiempo, esto no cambia la duracion de la transicion, linear es el valor por defecto*/
+}
+.transitions div:nth-child(2){
+    transition-timing-function: ease; /*inicia rapido termina lento    */
+}
+.transitions div:nth-child(3){
+    transition-timing-function: ease-in;  /*Inicia lento termina rapido */
+}
+.transitions div:nth-child(4){
+    transition-timing-function: ease-out; 
+}
+.transitions div:nth-child(5){
+    transition-timing-function: ease-in-out; /*Inicia lento, acelera al medio termina lento*/
+}
+
+
+
+
+
+
+/*     Animaciones      */
+
+.animaciones{
+    width: 100%;
+    height: 400px;
+    background-color:violet;    
+    padding: 60px;
+    box-sizing: border-box;
+}
+.animaciones div{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+}
+
+
+
+/* Para indicar que creamos una animacion se usa la palabra @keyframes seguida del nombre que le asignaremos    */
+
+@keyframes animacion {
+
+    /*  Dentro de keyframes vamos a delimitar bajo que condiciones inicia y con cuales termina, podemos hacerlo mediante las propiedades from/to  o por medio de porcentajes */ 
+
+    
+    from{
+        left: 0%;
+    }
+    to{
+        left: 90%
+    }
+
+    0%{
+        left: 0;
+        background-color: blue;
+    }
+    50%{
+        background-color: yellow;
+    }
+    100%{
+        left:90%;
+        background-color: #009900;
+    }
+
+}
+
+
+/*Luedo de dar nombre a la animacion es momento de aplicarla, por lo que nos vamos a la cajas a la cual se le va a aplicar la animacion */
+
+.animaciones div{
+    animation-name: animacion; /*Esta propiedad es obligatoria, asigna la animacion mediante el nombre      */
+    animation-duration: 1s; /*Duracion de la animacion */
+
+
+
+
+    animation-iteration-count: 3; /*Con esta propiedad indicamos cuantas veces se va a repetir la animacion */ 
+    animation-iteration-count: infinite;/*Valor para repetir la animacion infinitamente */
+
+
+
+
+
+
+    /*animation direction es para cambiar la direccion, es decir si antes iba de from a to, con esto podemos hacer que vaya de to a from o de 100% a 0% */
+
+    animation-direction: normal;
+    animation-direction: reverse; 
+    animation-direction:alternate; /*Co el valor alternate el elemento hara la animacion de from a to pero luego se devuelve de to a from; Solo funciona si animation-direction-count tiene un valor minimo de 2 */ 
+    animation-direction: alternate-reverse; /* Cumple la misma funcion que la anterior pero alrevez*/
+
+
+    animation-direction: normal;
+    animation-iteration-count: infinite;
+
+
+
+    /*Animation-fill-mode indica el valor que va a tener el elemento una vez haya finalizado la animacion*/
+
+    animation-fill-mode: none; /*Valor por defecto conserva las propiedades iniciales */
+
+    animation-fill-mode: backwards; 
+
+    animation-fill-mode: forwards; /*Este valor conserva el ultimo estado de la animacion (to) */
+
+    animation-fill-mode:none;
+
+
+
+    /*animation-timing-funtion modifica la funcion de la velocidad con la que va a incrementar el tiempo, la duracion sigue siendo la misma */
+    animation-timing-function: ease;
+    animation-timing-function: ease-in;
+    animation-timing-function: ease-out;
+    animation-timing-function: ease-in-out;
+
+    animation-timing-function: cubic-bezier(0,1.89,1,-0.66); /*Cubic-bezier es una funcion matematica de personalizar el movimiento, lo recomendado es usar algun generador web como  https://cubic-bezier.com  */
+
+}
+
+
+
+
+
+
+
+/*      TRANSFORM       */
+/*Las transformaciones modifican las propiedades de algun elemento */
+
+
+.transform{
+    width: 100%;
+    height: 200px;
+    background-color: #008;
+    padding: 50px;
+}
+.transform div{
+    width: 100px;
+    height: 100px;
+    display: flex;  
+    background-color: blueviolet;
+    transition: transform .5s;
+}
+.transform:hover > div{
+    /*Tranform tiene muchas propiedades pero para que se apliquen todas solo podemos declarar trasnform una sola vez, si la declaramos mas veces la propiedad tomara solo los nuevos valores  */
+    
+    transform: translateX(0px) translateY(0px) translate(300px, 0px) scale(.5) skew(10deg);
+
+    clip-path: polygon(20% 0%, 0% 20%, 24% 52%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 72% 50%, 100% 20%, 80% 0%, 50% 30%); /*Con clip path podemos modificar la forma del elemento para hacer
+        Generador : https://bennettfeely.com/clippy/
+    */
+
+}
+
+
+
+
+/*      VARIABLES      */
+
+/*El primer tipo de variables en css es la variable global, y se define con el selector :root */
+:root{
+    --mi_variable: red; /*Las variables se definen con dos guiones "--" seguido de un nombre cualquiera y el valor que le daremos, para despues invocarla en la propiedad a la cual se la daremos  */
+    --posicion: auto;
+}
+
+.var{
+    margin: var(--posicion);
+    width: 100px;
+    height: 100px;
+    background-color: var(--mi_variable)/*Para asignar la variable daremos el valor var() y entre los parentesis daremos el nombre de la variable */
+}
+
+.var p{
+    /*El segundo */
+    --mivariable2: blue;
+    background-color: var(--mivariable2);
+}
+
+
+
+
+
+/*     FILTROS       */
+/*  
+
+Los filtros son editores de imagen, se trabajan con la propiedad filter y sus valores pueden ser los siguientes
+
+    BLUR(px)
+
+    brightness(0-1)
+
+    contrast(number o %)     //el valor por defecto es 1
+
+    drop-shadow (px px px color)    //Funciona igual que box-shadow pero aplicado a imagenes 
+
+    grayscale(number o %)
+
+    hue-rotate(deg)     //Con este valor rotamos los colores en la gama de colores 
+
+    invert(%)   //Para invertir la gama de colores
+
+    opacity (0-1)   //Para la opacidad
+
+    saturate(%)     
+
+    sepia()
+
+*/
+
+.filter{
+    display: flex;
+}
+.filter div{
+    margin: 40px;
+    width:100px;
+    height: 100px;
+    background-color: blue;
+    border-radius: 50%;
+}
+.caja1{
+    position: relative;
+    left: 0;
+    animation-name: translate;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+@keyframes translate{
+    from{
+        left: 0;
+    }
+    to{
+        left: 120px;
+    }
+}
+
+.filter{
+    filter: contrast(5);
+}
+.caja2{
+    filter: blur(20px) 
+}
+.caja1{
+    filter: blur(20px) ;
+    
+}
+
+

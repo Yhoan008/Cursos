@@ -1,0 +1,10 @@
+{
+    "tipo":"text",
+    "nombre":"Yhoan",
+    "edad":21,
+    "apellido":"moreno",
+    "familia":{
+        "esposa":"Lisbeth Fernanda",
+        "hija":"Khloe Miranda"
+    }
+}

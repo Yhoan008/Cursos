@@ -1,0 +1,334 @@
+
+body{
+    background-color: coral;
+    margin: 20px;
+}
+
+.grid_container{
+    margin: 40px;
+    border: 3px solid black;
+}
+.grid_container div{
+    border:1px solid #000;
+}
+
+.grid_container{
+    display: grid; /*DISPLAY GRID  es el valor que nos configura la caja contenedora como tabla, en la visual no vamos a notar ninguna diferencia pero a partir de esto podemos empezar a modelar la tabla */
+    /*Para el modelado de la tabla vamos a utilizar las siguientes dos propiedades*/
+
+    grid-template-rows: 120px 120px 120px; /*grid-template-rows hace referencia al numero y tamaño de filas en la tabla, la cantidad de valores que ingresemos separados por un espacio va a ser el numero de filas que va a tener*/
+
+    grid-template-columns: 2fr 120px 1fr; /* grid-template-columns hace referencia al numero de columnas en la tabla, funciona igual que la propiedad anterior; 
+    
+    Los valores que podemos ingresar pueden ser de dos tipos, de valor fijo (px,em,mm, etc) o de valor relativo (fr);
+    
+    el valor fr calcula el espacio sobrante del contenedor y lo reparte segun el valor que ingresemos, por ejemplo si una columna tiene 1fr y otra 2fr, el valor total sobrante del contenedor se va a repartir entre estas dos columnas, pero una va a tener el doble de tamaño que la otra    */
+
+    grid-template-columns: repeat(3, 120px 1fr); /*La funcion repeat nos evita escribir cada valor de cada fila o columna, simplente ingresamos cuantas veces queremos que se repita, y cuanto van a medir las celdas a repetir, si ingresamos mas de un valor, se va a repetir la misma secuencia de valores*/
+
+
+
+    grid-template: 120px 120px 120px / 120px 120px 120px;/*Propiedad shorthand de las dos anteriores propiedades */
+
+
+    grid-gap: 10px; /*es un margin pero entre las celdas de la tabla, no afecta el margin total
+    Esta propiedad es un shorthand compuesta por las siguientes propiedades */
+    grid-row-gap: 10px;
+    grid-column-gap:10px;
+}
+.grid_container div:first-child{
+    background-color: red;
+}
+.grid_container div:nth-child(2){
+    background-color: green;
+    grid-column: 2/4; /*con esta propiedad indicamos que queremos que el elemento seleccionado ocupe el espacio de otras celdas, los valores refieren a las lineas que delimitan cada celda */
+    grid-row: 1 / 2; /*Los valores por defecto, tienen una unidad de diferencia entre si, que es la unidad de la celda*/
+
+    /*Las anteriores dos propiedades tambien son un shorthand, pudiendo reemplazarse por */
+    grid-column-start: 2;
+    grid-column-end:3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    grid-column: 2/ span 2; /*span se usa para indicar que queremos que el elemento inicie en la linea de la columna 2, y que ocupe dos espacios MAS, es decir nos evita contar en la tabla el valor donde termina*/
+
+}
+
+
+
+
+
+
+.grid_implicito{
+    margin: 40px;
+    border: 3px solid black;
+}
+.grid_implicito div{
+    background-color: #444;
+    border: 1px solid black;
+}
+
+/*      EL GRID IMPLICITO se refiere a los elementos "Extra" que no fueron definidos mediante la propiedad grid-template, es decir, no tiene ni ubicacion ni tamaño predefinido */
+
+.grid_implicito{
+    display: grid;
+    grid-template-columns: repeat(3,120px);
+    grid-template-rows: repeat(3, 120px);
+
+    grid-auto-rows: 120px; /*Esta propiedad asigna un valor de tamaño a los elementos que no estan predefinidos en el grid y que son agregados como nuevas filas */
+    grid-auto-columns: 120px; /*Esta propiedad funciona igual que la anterior pero agregando nuevas columnas*/
+
+    
+    grid-auto-flow: column;/*Si queremos que las casillas extra se agregen automaticamente a las columnas daremos el valor column; esto va a girar el orden de la tabla 90 grados, pero las columnas siguen siendo columnas y las filas siguen siendo filas*/
+    grid-auto-flow: row;/* Esta es la propiedad por defecto, las nuevas casillas se ubicaran a lo largo del row o nuevas lineas lineas*/
+}
+
+
+/*Para la siguente propiedad vamos a "romper" la tabla */
+.grid_implicito div:nth-child(3){
+    grid-column: 2/3;
+}
+.grid_implicito{
+    grid-auto-flow: dense; /*Esta propiedad solo funciona cuando quedan espacion sin rellenar dentro de la tabla, lo que hace es buscar espacion sin rellenar en la tabla, y los ocupa con los elementos mas cercanos y parecidos en tamaño que encuentra en el resto de la tabla */
+}
+
+
+
+
+
+
+.grid_dinamico{
+    margin: 40px;
+    border: 3px solid black;
+    
+}
+.grid_dinamico div{
+    background-color: #444;
+    border: 1px solid black;
+}
+.grid_dinamico{
+    display:grid;
+
+    /*Los siguientes valores no son dinamicos, van a ser fijos segun el contenido */
+    grid-template-columns: repeat(3, min-content);/*Con el valor de min content vamos a indica que el tamaño predefinido de las casillas va a ser el tamaño minimo posible segun el contenido */
+    grid-template-columns: repeat(3, max-content);/* max-content funciona igual que min content, pero con el tamaño maximo que puede ocupar el contenido */
+
+
+
+    grid-template-columns: repeat(3, minmax(120px,200px));/*con el valor/propiedad MINMAX podemos definir de forma dinamica cual va a ser el tamaño minimo y cual va a ser el maximo de las casillas, se le pasan dos parametros que asignan estos dos valores respectivamente */
+
+
+    grid-template-columns: repeat(3,minmax(min-content,max-content));   /*Todas las propiedades anteriores con combinables, en este caso el tamaño minimo va a ser lo minimo que puede ocupar el contenido, y el tamaño maximo el maximo del contenido , FACIL!*/
+
+
+    grid-template-rows:repeat(3,120px);
+    grid-template-columns: repeat(auto-fill,minmax(120px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
+    /*Los valores auto-fill y auto-fit son para hacer que las casillas se ubiquen en una nueva columna si tiene el espacio, que en este caso son 120px como minimo, si no tiene el espacio, se ubicara en la fila de abajo  
+    
+    La diferencia entre auto-fit y auto-fill, es que auto-fit escala las casillas para ocupar todo el espacio disponible en una fila, auto-fill no , solo se puede notar la diferencia si la cantidad de elementos o casillas es igual a la cantidad de columnas 
+    */
+
+}
+
+
+
+
+
+
+
+
+/*      ALINEACION DE TABLAS O ELEMENTOS GRID   */
+/*
+Para la alineacion de tablas tenemos dos tipos de propiedades, las que se aplican a la tabla entera, y las que se aplican a los elementos o casillas individuales 
+
+La palabra content va a hacer referencia a propiedades del contenedor o tabla entera, los valores modifican la alineacion de la caja en general
+
+La palabra items hace refencia a la modificacion de las propiedades de todos los elementos o casillas que estan dentro de la caja contenedora 
+
+La palabra self hace referencia a cada elemento o casilla individualmente, sus valores modifican cada casilla por separado de las otras y le da valores completamente independientes
+
+
+*/
+.grid_alin{
+    border: 3px solid black;
+    display: grid;  
+    /*Para las propiedades de la tabla entera vamos a darle a las casillas un valor fijo si no no podremos notar la diferencia */
+    grid-template-columns: repeat(3,120px);
+    grid-template-rows: repeat(3,120px);
+    background-color: #666;
+    height: 600px;
+
+    justify-content: center; /*Esta propiedad alinea la tabla entera a lo largo del eje X ; dentro de los valores que podemos seleccionar tenemos strench(por defecto), center, start/flex-start(Ambos funcionan exactamente igual), end/flex-end */
+    align-content: center;/*Esta propiedad alinea la tabla entera a lo largo del eje Y */
+}
+
+
+
+.grid_alin{
+    /*Aca cambiaremos el tamaño de las casillas a uno adaptable para notar las diferencias */
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+
+    justify-items: center;/*Esta propiedad alinea cada una de las casillas en el eje X, segun el espacio que cada una tenga disponible; dentro de los valores que podemos seleccionar tenemos strench(por defecto), center, start/flex-start(Ambos funcionan exactamente igual), end/flex-end */
+    align-items: center;/*Esta propiedad alinea cada una de las casillas en el eje Y, segun el espacio que cada una tenga disponible*/
+}
+.grid_alin div{
+    padding: 40px;
+    background-color: #333;
+    border: 1px solid black;
+    margin: 2px;
+}
+
+.grid_alin div:first-child{
+    background-color: springgreen;
+    /*Con la siguiente propiedad (Camabiando el items o content por el self) modificamos las propiedades de cada elemento o casilla en especifico */
+    justify-self: start;
+    align-self: start;
+}
+.grid_alin div:last-child{
+    background-color: aqua;
+    /*La propiedad place- es un shorthand de align y justify respectivamente, donde al ingresar estos dos valores van a ser tomados en ese orden para estas dos propiedades, pero si solo se ingresa un valor, este sera el mismo para ambas */
+    place-self: end end;
+    place-self: end;
+}
+
+
+.grid_alin div:nth-child(2){
+    place-self: end center;
+}
+.grid_alin div:nth-child(3){
+    place-self: start end;
+}
+.grid_alin div:nth-child(4){
+    place-self: center end;
+}
+.grid_alin div:nth-child(5){
+    place-self: center;
+}
+.grid_alin div:nth-child(6){
+    place-self: center start;
+}
+.grid_alin div:nth-child(7){
+    place-self: end start;
+}
+.grid_alin div:nth-child(8){
+    place-self: start center;
+}
+
+
+
+
+
+
+
+
+
+/*      GRID AREAS     */
+/* En esta seccion vamos a separar conjuntos de celdas o casillas segun el nombre que le demos   */
+
+.grid_area{
+    outline: 3px solid red;
+    display: grid;
+
+    grid-template-rows: repeat(auto-fill,1fr);
+    grid-template-areas:
+    "header header header header header"
+    "aside main main main main"
+    "aside main main main main"
+    "aside main main main main"
+    "aside main main main main"
+    "aside main main main main"
+    "aside main main main main"
+    "aside main main main main"
+    "aside main main main main"
+    "aside main main main main"
+    "aside main main main main"
+    "aside main main main main"
+    "aside main main main main"
+    "footer footer footer footer footer";
+    /*Con esta propiedad estamos asignando el numero de filas y columnas consecutivas y repectivamente como esta en el ejemplo igualmente va a estar en la tabla, donde cada casilla va a tener un nombre asignado, y como algunas casillas tienen el mismo nombre, despues vamos a poder trabajarlas en conjunto 
+    Entre mas columnas o filas mas tamaño va a tener en la visual
+    */
+
+    height:100vh;
+
+}
+
+
+
+.grid_header{
+    background-color: chocolate;
+    grid-area: header;
+}
+.grid_header li{
+    text-align: end;
+    padding-top: 10px;
+    list-style: none;
+}
+.grid_header a{
+    margin-left: 20px;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 1.4em;
+    color: black;
+    border-radius: 10px;
+}
+.grid_header a:hover{
+    background-color: rgb(100, 100, 100, .6);
+}
+
+
+
+.grid_main{
+    background-color:crimson;
+    grid-area: main;
+}
+.grid_aside{
+    background-color: yellow;
+    grid-area: aside;
+}
+.grid_footer{
+    background-color:slateblue;
+    grid-area: footer;
+}
+
+
+
+
+
+
+/*Nombres para filas y columnas */
+
+.grid_name{
+    display: grid;
+    justify-content: center;
+    
+    
+    grid-template-columns: 
+        [primer]
+        120px 
+        [segundo]
+        120px 
+        [ultimo]   
+        120px
+        [soy_la_ultima_linea];
+
+        /*De esta forma vamos a darle un nombre a cada linea delimitadora de la tabla */
+    
+    grid-template-rows: 
+        120px 
+        120px  
+        120px;
+
+    }
+    .grid_name div{
+        outline:1px solid red;
+    }
+
+.grid_name div:first-child{
+    background-color: red;
+    grid-column: primer/soy_la_ultima_linea;
+}
+
+
