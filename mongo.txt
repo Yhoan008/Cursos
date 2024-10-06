@@ -1,0 +1,46 @@
+CURSO BASICO SOBRE EL USO DE MONGODB
+
+El primer paso es las instalacion, en la pagina de mongo vamos a encontrar tres principales productos para usar
+
+
+MongoAtlas : Es el server principal de mongo, aca se suben los proyectos a produccion ya que cuenta con muchas mas herramientas para usar, esta por el momento no es usada
+
+MongoCompas : Es el visualizador de nuestas bases y conexiones locales
+
+MongoServer : Es el programa que ejecuta el server en nuestro computador
+
+
+
+Despues de instalar las herramientas hay que asegurarnos que se puede iniciar el server desde la terminal de comandos, para esto, debe estar agregada en el PATH 
+
+para ejecutar mongo escribimos en la terminal:
+
+
+mongod
+mongosh //Para iniciar la shell de control de mongo
+
+
+La jerarquia es, primero estan las bases de datos, en cada base hay tablas, y cada tabla es el listado de objetos json
+
+
+
+db.help()                   :Listado de comandos disponibles
+
+show dbs                    :mostrar bases
+use <Nombre-de-la-base>     :Usar una base de datos del listado
+show tables                 :Mostrar las tablas de la base actual
+db.<tabla>.find({})         :Mostrar todos los datos de la tabla que coincidan con el parametro
+db.<tabla>.findOne()        :Devuelve el primer dato que coincida con el parametro
+db.<tabla>.insertOne()      :Insertar un objeto a la tabla
+db.<tabla>.insertMany()     :Insertar varios objetos a la tabla
+db.<tabla>.updateOne()      :Actualizar un elemento de la tabla, recibe dos parametros: {fitro},{$set:{nuevos valores}}
+db.<tabla>.deleteOne()      :Eliminar una elemento de la tabla
+db.<tabla>.drop()           :Eliminar toda la tabla actual
+
+
+
+
+
+Es importante destacar que la shell de Mongo puede ejecutar JAVASCRIPT, esto quiere decir que puede ejecutar:
+
+db.<tabla>.find().forEach((product) => print("Product Price: " + product.price ) )
