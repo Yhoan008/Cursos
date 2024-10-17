@@ -1,0 +1,125 @@
+CURSO SOBRE BASES DE DATOS SQL // PLATZY 
+
+
+
+NORMALIZACION
+
+La normalizacion es la buena organizacion de los datos, es importante tener en cuenta como buenas practicas:
+
+- Datos atomicos: Esto significa que cada campo debe tener un valor unico, sin grupos ni listas
+- Foreing Key: Cada tabla 
+
+
+
+
+TIPOS DE Datos
+
+NUMERICOS 
+-INT: Enteros 
+-BIGINT: Enteros de gran tamaño, es usado para foreing key o hashes 
+-DECIMAL(P,S): Decimales, P es el numero de digitos permitidos antes de la coma, S los digitos permitidos despues de la coma
+-FLOAT: Tambien representa decimales sin condiciones
+
+TEXTO
+-CHAR(n): Texto con n numero de caracteres, completa los espacios vacios
+-VARCHAR(n): Texto con n numero de caracteres pero no completa los espacios vacios
+-NVARCHAR(): Texto, incluye caracteres de UNICODE
+-TEXT: Texto sin tener en cuenta el numero de caracteres, es el mas optimo
+
+TIPOS A TENER EN CUENTA
+
+-DATETIME: Almacena datos en formato YYYY-MM-DD junto con la hora
+-TIMESTAMP: Almacena datos de fecha, pero es mas usado porque tiene en cuenta diferencias horarias 
+-BINARY(n): Numero binario con n caracteres, completa espacios vacios
+-BIT: Almacena datos de 0 y 1, que significan false o true
+-BLOB: Almacena datos binarios grandes, como imagenes o archivos
+
+
+
+COMANDOS IMPORTANTES
+
+SELECT: Se usa para consultar datos 
+
+    SELECT name FROM sys.databases;         Este comando lista por nombre todas las bases existentes
+
+    SELECT ("Esto es un texto");            SQL tambien es un lenguaje, por lo que procesa operaciones e imprime en pantalla
+
+    SELECT (2*15)    
+
+    SELECT * FROM TABLE;                    Lista todos los datoS de una tabla            
+
+
+CREATE : Se usa para la creacion de nuevas bases de datos y nuevas tablas 
+
+
+    Esta es la creacion de una tabla basica, lo que esta en frente de la variable son propiedades del dato
+
+    CREATE TABLE tableTest (                    
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        Name VARCHAR(100) NOT NULL,
+        Age INTEGER
+    )
+
+    Es importante detallar algunos de los parametros mas usados 
+
+    -Tipo: Va justo despues del nombre del dato
+    -PRIMARY KEY: Indica que este campo debe ser unico y no nulo
+    -AUTOINCREMENT: Indica que con cada nuevo registro se va a sumar una unidad automaticamente 
+    -NOT NULL: Indica que obligatoriamente debe haber un dato, no son permitidos datos vacios
+    -UNIQUE: Indica que debe ser un valor unico, revisa toda la tabla en busca de datos iguales, si encuentra, devuelve un error
+    -CHECK (condicion): Indica una condicion que debe cumplirse para guardar el dato
+    -DEFAULT: Asigna valores por defecto cuando un dato es nulo
+
+
+INSERT INTO: Inserta nuevos datos a nuestra tabla existente
+
+    Hay que recalcar que esto aunque se escribe en dos lineas, es una sola sentencia a ejecutar
+
+    INSERT INTO table (id, name, age)
+    VALUES (1, 'Yhoan Moreno', 23);
+
+
+UPDATE: Este comando cambia el valor del dato en una tabla existente 
+
+    La siguiente recuerda que tambien es una sentencia, recuerda que cada una termina donde esta la coma
+
+    UPDATE table 
+    SET identificador1="nuevo valor"
+    WHERE identificador2="ID";
+
+    Es importante filtrar el dato que vamos a cambiar con WHERE
+
+
+DELETE FROM: Este comando es para eliminar datos en una tabla
+
+    DELETE FROM table WHERE condicion;
+
+    Aca tambien es importante filtrar con la sentencia WHERE, porque si no estaremos eliminando toda la base de datos
+
+
+    
+    
+    
+WHERE condicion: Este comando devuelve los valores que cumplan con la condicion, son importantes para DELETE FROM y UPDATE
+
+    Pero la condicion puede ser por ejemplo :
+
+    WHERE id = 1;
+
+    WHERE salary > 20000;
+
+    WHERE salary between 20000 and 60000;
+
+    Exactamente como se manejan los condicionales en leguajes de programacion
+
+
+LIKE '' : Este comando filtra de los datos cuales contienen cierto caracter que queremos encontrar
+
+    SELECT * FROM table WHERE name LIKE '%D%'; 
+
+    Este comando muestra en consola todos los datos de name que tengan la letra D dentro de sus caracteres
+    Asi como el siguiente devuelve los datos que terminen en la letra o
+
+    SELECT * FROM table WHERE name LIKE '%O';
+
+    
