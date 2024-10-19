@@ -110,7 +110,13 @@ WHERE condicion: Este comando devuelve los valores que cumplan con la condicion,
 
     WHERE salary between 20000 and 60000;
 
-    Exactamente como se manejan los condicionales en leguajes de programacion
+    TIPOS DE CONDICIONALES
+
+    Los siguientes son condicionales de verdad
+
+    AND, OR , NOT, IN
+
+    SELECT * FROM students WHERE age NOT IN (20);           Esto devuelve todos los valores de la tabla donde la edad no sea 20
 
 
 LIKE '' : Este comando filtra de los datos cuales contienen cierto caracter que queremos encontrar
@@ -122,4 +128,89 @@ LIKE '' : Este comando filtra de los datos cuales contienen cierto caracter que 
 
     SELECT * FROM table WHERE name LIKE '%O';
 
-    
+
+
+OPERADORES: Son operadores para aplicar a los datos devueltos de un SELECT
+
+    COUNT(*)        Devuelte el conteo del total de resultados devueltos.
+
+    SUM()           Devuelve la sumatoria de los valores devueltos, deben ser NUMERICOS
+
+    AVG()           Devuelve el promedio de todas valores devueltos.
+
+    MIN(), MAX()    Devuelve valores maximos y minimos de la lista de datos devueltos, deben ser numericos
+
+    ROUND()         Devuelve el valor redondeado de una lista de decimales devueltos.
+
+
+
+GROUP BY:   Este comando es para agrupar datos dependiendo de la cantidad de veces que se repite
+
+    SELECT Estudiante, COUNT(courses) AS Cursos_Inscritos FROM table GROUP BY Estudiante;
+
+
+
+
+UNION DE TABLAS : Los siguientes comandos se usan para unir dos tablas 
+
+    INNER JOIN: Une los datos que esten presentes en AMBAS tablas
+
+    LEFT JOIN: Une TODOS los datos de la tabla1 con los que coincidan en la tabla2
+
+    RIGHT JOIN: Une los datos que coincidan en la tabla1 con TODOS los datos de la tabla2
+
+         
+         SELECT * FROM PRODUCTS INNER JOIN MARCA ON MARCA.ID = PRODUCTS.marca_id;
+
+
+
+SUBCONSULTAS: con la comando WITH podemos hacer funciones de consulta o porciones que consultamos despues
+
+    WITH subconsult AS (
+        SELECT * FROM TABLE;
+    )
+    SELECT * FROM subconsult;
+
+
+
+PROCEDIMIENTOS: Son las funciones en sql, pueden proteger los datos mas facilmente
+
+    CREATE PROCEDURE procedureExample(
+        IN num1 INT,
+        IN num2 INT,
+        OUT resultado INT
+    )
+    BEGIN
+
+        DECLARE handler_type HANDLER FOR exception;
+        BEGIN
+            SELECT 'No se ha podido hacer la peticion debido a un error'
+            ROLLBACK;
+        END;
+
+        START TRANSACTION;
+
+            INSERT INTO table(value1,value2)
+            VALUES ('','');
+
+        COMMIT;
+
+    END;
+
+
+    En el anterior ejemplo se crea un proceso, donde entre parentesis de definen los parametros a usar, IN son los que vamos a usar, y OUT son los que esta permitido exportarlos
+    Tambien con DECLARE podemos hacer manejo de errores, donde handler_type puede ser CONTINUE O EXIT, para continuar o salir
+    y exception es el tipo de evento que estamos captando como SQLEXCEPTION, SQLWARNING, NOT FOUND; El mas comun es SQLEXCEPTION.
+
+    Todo lo anterior puede cambiar entre SQL MYSQL o PostgreSQL
+
+
+
+GRAND // REVOKE : Este comando se utiliza para otorgar o quitar permisos en una base de datos, la estructura es
+
+    GRAND permiso ON table FROM user1;
+    REVOKE permiso ON table FROM user1;
+
+    Los permisos que podemos cambiar son SELECT INSERT DELETE UPDATE
+
+
