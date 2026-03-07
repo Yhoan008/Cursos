@@ -1,0 +1,52 @@
+
+Comandos basicos
+-pwd : Ver directorio actual
+-whoami : Para saber usuario actual
+
+Navegacion de archivos: ls,cd
+
+Gestion de carpetas: mkdir, rm, mv, cp, touch 
+
+Redirecciones y pipes 
+- ">" : Pasa la salida de un comando a un archivo y lo sobrescribe
+- ">>" : Pasa la salida a un archivo agregando contenido
+- "|" : Toma la salida de un comando a otro comando
+
+Buscar 
+- find : Para buscar archivos por nombre, extencion, tamaño
+- grep : Para buscar Texto dentro de archivos
+
+Permisos
+- chmod +x script.sh : Hacer archivo ejecutable
+- chown, chgrp : Cambiar dueño o grupo
+
+Servicios
+- Systemd/System deamon : Gestionar servicios en segundo plano
+
+Bash
+-Variables-Bucles-Operadores-Funciones-Arreglos-ComandosAvanzados
+-Cron : Para ejecutar comandos cada cierto tiempo
+
+Redes Networking, logs, Monitoreos
+-ip addr-ping-curl-ss -tulpn
+SSH y Transferencia
+-ssh user@host-scp origen destino-rsync-av
+var/log-tail -f - journalctl -u servicio
+
+Recursos de sistema 
+-df -h
+-du -sh
+-free -h
+-top htop
+
+Usuarios y Grupos
+-id-adduser-passwd-groups-visudo
+
+Firewall(UFW)
+-ufw status - enable-allow
+
+Variables de entorno
+-echo $PATH
+-export VAR=valow
+-Alias en bashrc
+

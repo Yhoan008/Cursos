@@ -1,0 +1,8 @@
+total 24
+drwxrwxr-x 2 mateo mateo 4096 mar  1 14:33 .
+drwxrwxr-x 4 mateo mateo 4096 feb 28 20:26 ..
+-rwxrwxr-x 1 mateo mateo 2293 mar  1 14:21 faztBash1.sh
+-rwxrwxr-x 1 mateo mateo  102 mar  1 14:29 faztBash2.sh
+-rw-rw-r-- 1 mateo mateo    0 mar  1 14:33 file.txt
+-rw-rw-r-- 1 mateo mateo 1161 mar  1 14:11 init.txt
+-rw-rw-r-- 1 mateo mateo   84 feb 28 20:49 package-lock.json
