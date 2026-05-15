@@ -1,3 +1,14 @@
+//const http = require("http")
+//const server = http.createServer((req,res)=>{})
+//server.listen(5000)
+//console.log("Servidor corriendo en puerto 5000")
+
+
+// RECUERDA QUE LOS SERVIDORES FUNCIONAN CON PETICIONES HTTP, POR LO QUE CON LO ANTERIOR PODEMOS CREAR UN SERVIDOR RAPIDO
+
+
+
+
 const express = require("express");
 const path = require("path");
 
