@@ -1,0 +1,8 @@
+
+
+--- Endpoints ---
+GET  /         -> Sirve el index.html de la carpeta dist
+POST /register -> Body: { username, email, password }
+POST /login    -> Body: { username, password }
+
+error.message === "Failed to fetch")
